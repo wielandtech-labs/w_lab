@@ -82,12 +82,12 @@ The cluster hosts a variety of self-hosted applications:
 - **<img src="https://cdn.jsdelivr.net/gh/walkxcode/dashboard-icons/svg/renovate.svg" width="16" height="16"> [Renovate](https://renovatebot.com/)** - Automated dependency updates and security patches ([Documentation](https://docs.renovatebot.com/) | [GitHub](https://github.com/renovatebot/renovate))
 
 **Web Services:**
-- **<img src="https://cdn.jsdelivr.net/gh/walkxcode/dashboard-icons/svg/python.svg" width="16" height="16"> [WielandTech Website](https://wielandtech.com/)** - Personal portfolio and blog self-hosted on the homelab cluster ([GitHub](https://github.com/wielandtech/w_tech))
+- **<img src="https://cdn.jsdelivr.net/gh/walkxcode/dashboard-icons/svg/python.svg" width="16" height="16"> [WielandTech Website](https://wielandtech.com/)** - Personal portfolio and blog self-hosted on the homelab cluster ([GitHub](https://github.com/wielandtech-labs/w_tech))
 
 ## 🔗 Repository Links
-- **📸 Documentation & Hardware**: [w_lab](https://github.com/wielandtech/w_lab) (this repo) - Public documentation, hardware list, and photos
+- **📸 Documentation & Hardware**: [w_lab](https://github.com/wielandtech-labs/w_lab) (this repo) - Public documentation, hardware list, and photos
 - **🔧 Infrastructure Code**: Private GitOps repository with the Kubernetes manifests and Flux configuration (Flux v2, CloudNativePG, Prometheus, sealed secrets)
-- **🌐 Personal Website**: [wielandtech.com](https://wielandtech.com/) - Self-hosted portfolio and blog ([Source Code](https://github.com/wielandtech/w_tech))
+- **🌐 Personal Website**: [wielandtech.com](https://wielandtech.com/) - Self-hosted portfolio and blog ([Source Code](https://github.com/wielandtech-labs/w_tech))
 
 ## 🙏 Special Thanks
 * [**Jeff Geerling**](https://github.com/geerlingguy) — ["Project Mini Rack"](https://github.com/geerlingguy/mini-rack) for inspiring my shopping list.
