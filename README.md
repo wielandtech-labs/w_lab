@@ -85,8 +85,8 @@ The cluster hosts a variety of self-hosted applications:
 - **<img src="https://cdn.jsdelivr.net/gh/walkxcode/dashboard-icons/svg/python.svg" width="16" height="16"> [WielandTech Website](https://wielandtech.com/)** - Personal portfolio and blog self-hosted on the homelab cluster ([GitHub](https://github.com/wielandtech/w_tech))
 
 ## 🔗 Repository Links
-- **🔧 Infrastructure Code**: [w_homelab](https://github.com/wielandtech/w_homelab) - Private GitOps repository with Kubernetes manifests
-- **📸 Documentation**: [w_lab](https://github.com/wielandtech/w_lab) - Public documentation and photos
+- **📸 Documentation & Hardware**: [w_lab](https://github.com/wielandtech/w_lab) (this repo) - Public documentation, hardware list, and photos
+- **🔧 Infrastructure Code**: Private GitOps repository with the Kubernetes manifests and Flux configuration (Flux v2, CloudNativePG, Prometheus, sealed secrets)
 - **🌐 Personal Website**: [wielandtech.com](https://wielandtech.com/) - Self-hosted portfolio and blog ([Source Code](https://github.com/wielandtech/w_tech))
 
 ## 🙏 Special Thanks
