@@ -48,7 +48,11 @@ This homelab runs a complete Kubernetes infrastructure with GitOps automation:
 | **Secrets** | Sealed Secrets | Encrypted secrets management for GitOps |
 | **Database** | CloudNativePG + Redis | Production-ready PostgreSQL operator + caching layer |
 | **Monitoring** | Prometheus + Grafana + Netdata | Metrics collection, visualization, and AI-powered troubleshooting |
-| **Automation** | Renovate + n8n | Dependency updates and workflow automation |
+| **Automation** | Renovate + n8n | Dependency updates (CI-gated automerge) and workflow automation |
+| **Logs** | Loki + Grafana Alloy | 14-day queryable log history for every pod |
+| **Alerting** | Alertmanager + ntfy | Push alerts to phones, plus a healthchecks.io dead-man's switch that reports whole-lab outages from outside |
+| **Backups** | CNPG volumeSnapshots + snapscheduler | Nightly NAS-level snapshots of databases and stateful app volumes |
+| **CI/CD** | GitHub ARC + BuildKit | In-cluster ephemeral Actions runners and a shared remote BuildKit for container builds |
 
 ## ⚡ Applications & Services
 The cluster hosts a variety of self-hosted applications:
@@ -66,7 +70,7 @@ The cluster hosts a variety of self-hosted applications:
 - **<img src="https://cdn.jsdelivr.net/gh/walkxcode/dashboard-icons/svg/home-assistant.svg" width="16" height="16"> [Home Assistant](https://www.home-assistant.io/)** - Complete home automation platform ([Installation Guide](https://www.home-assistant.io/installation/) | [GitHub](https://github.com/home-assistant/core))
 
 **Monitoring & Observability:**
-- **<img src="https://cdn.jsdelivr.net/gh/walkxcode/dashboard-icons/svg/prometheus.svg" width="16" height="16"> [Prometheus](https://prometheus.io/)** - Metrics collection and alerting with 30-day retention ([Installation Guide](https://prometheus.io/docs/prometheus/latest/installation/) | [GitHub](https://github.com/prometheus/prometheus))
+- **<img src="https://cdn.jsdelivr.net/gh/walkxcode/dashboard-icons/svg/prometheus.svg" width="16" height="16"> [Prometheus](https://prometheus.io/)** - Metrics collection and alerting with 365-day retention ([Installation Guide](https://prometheus.io/docs/prometheus/latest/installation/) | [GitHub](https://github.com/prometheus/prometheus))
 - **<img src="https://cdn.jsdelivr.net/gh/walkxcode/dashboard-icons/svg/grafana.svg" width="16" height="16"> [Grafana](https://grafana.com/)** - Visualization dashboards with persistent storage ([Installation Guide](https://grafana.com/docs/grafana/latest/setup-grafana/installation/) | [GitHub](https://github.com/grafana/grafana))
 - **<img src="https://cdn.jsdelivr.net/gh/walkxcode/dashboard-icons/svg/prometheus.svg" width="16" height="16"> [AlertManager](https://prometheus.io/docs/alerting/latest/alertmanager/)** - Alert routing and management ([GitHub](https://github.com/prometheus/alertmanager))
 - **<img src="https://cdn.jsdelivr.net/gh/walkxcode/dashboard-icons/svg/prometheus.svg" width="16" height="16"> [Blackbox Exporter](https://prometheus.io/docs/guides/multi-target-exporter/)** - External endpoint monitoring and health checks ([GitHub](https://github.com/prometheus/blackbox_exporter))
@@ -80,9 +84,20 @@ The cluster hosts a variety of self-hosted applications:
 - **<img src="https://cdn.jsdelivr.net/gh/walkxcode/dashboard-icons/svg/postgresql.svg" width="16" height="16"> [PostgreSQL](https://www.postgresql.org/)** - Production-ready database clusters with CloudNativePG ([Installation Guide](https://www.postgresql.org/docs/current/installation.html) | [GitHub](https://github.com/postgres/postgres))
 - **<img src="https://cdn.jsdelivr.net/gh/walkxcode/dashboard-icons/svg/redis.svg" width="16" height="16"> [Redis](https://redis.io/)** - In-memory data store for caching and sessions ([Installation Guide](https://redis.io/docs/getting-started/installation/) | [GitHub](https://github.com/redis/redis))
 - **<img src="https://cdn.jsdelivr.net/gh/walkxcode/dashboard-icons/svg/renovate.svg" width="16" height="16"> [Renovate](https://renovatebot.com/)** - Automated dependency updates and security patches ([Documentation](https://docs.renovatebot.com/) | [GitHub](https://github.com/renovatebot/renovate))
+- **<img src="https://cdn.jsdelivr.net/gh/walkxcode/dashboard-icons/svg/ntfy.svg" width="16" height="16"> [ntfy](https://ntfy.sh/)** - Self-hosted push notifications; delivery channel for all cluster alerts ([GitHub](https://github.com/binwiederhier/ntfy))
 
 **Web Services:**
 - **<img src="https://cdn.jsdelivr.net/gh/walkxcode/dashboard-icons/svg/python.svg" width="16" height="16"> [WielandTech Website](https://wielandtech.com/)** - Personal portfolio and blog self-hosted on the homelab cluster ([GitHub](https://github.com/wielandtech-labs/w_tech))
+- **<img src="https://cdn.jsdelivr.net/gh/walkxcode/dashboard-icons/svg/github.svg" width="16" height="16"> [WARN Scraper v2](https://github.com/wielandtech-labs/warn_scraper_v2)** - AI-assisted layoff-notice scraper with self-healing parsers and LLM enrichment
+- **<img src="https://cdn.jsdelivr.net/gh/walkxcode/dashboard-icons/svg/github.svg" width="16" height="16"> [github-readme-stats](https://github.com/wielandtech-labs/github-readme-stats)** - Self-hosted fork serving dynamic GitHub profile cards
+
+## 🤖 Agent Development Platform
+Since mid-2026 the cluster doubles as a deployment target for AI coding agents (Claude Code) building full applications end to end. The private GitOps repo provides the rails:
+
+- **One-command app scaffolding** — manifests, Flux image automation, secrets, DNS conventions
+- **Per-PR review apps** — every pull request gets its own namespace, ephemeral database, TLS certificate, and `pr-N.review.*` URL, torn down on close; locked behind default-deny NetworkPolicies
+- **dev → QA → prod promotion** — image-tag-based, gated by CI and post-merge deploy verification on in-cluster runners
+- **Read-only agent access** — agents debug deployments through a Tailscale API-server proxy bound to a least-privilege ClusterRole (no secrets, no writes; all changes go through pull requests)
 
 ## 🔗 Repository Links
 - **📸 Documentation & Hardware**: [w_lab](https://github.com/wielandtech-labs/w_lab) (this repo) - Public documentation, hardware list, and photos
@@ -101,28 +116,28 @@ The cluster hosts a variety of self-hosted applications:
 <table>
   <tr>
     <td align="center" width="50%">
-      <a href="https://raw.githubusercontent.com/wielandtech/w_lab/main/w_homelab_front.jpg" target="_blank">
-        <img src="https://raw.githubusercontent.com/wielandtech/w_lab/main/w_homelab_front.jpg" alt="Homelab Front View" width="400" style="max-width: 100%; height: auto;">
+      <a href="https://raw.githubusercontent.com/wielandtech-labs/w_lab/main/w_homelab_front.jpg" target="_blank">
+        <img src="https://raw.githubusercontent.com/wielandtech-labs/w_lab/main/w_homelab_front.jpg" alt="Homelab Front View" width="400" style="max-width: 100%; height: auto;">
       </a>
       <br><em>Front View</em>
     </td>
     <td align="center" width="50%">
-      <a href="https://raw.githubusercontent.com/wielandtech/w_lab/main/w_homelab_back.jpg" target="_blank">
-        <img src="https://raw.githubusercontent.com/wielandtech/w_lab/main/w_homelab_back.jpg" alt="Homelab Back View" width="400" style="max-width: 100%; height: auto;">
+      <a href="https://raw.githubusercontent.com/wielandtech-labs/w_lab/main/w_homelab_back.jpg" target="_blank">
+        <img src="https://raw.githubusercontent.com/wielandtech-labs/w_lab/main/w_homelab_back.jpg" alt="Homelab Back View" width="400" style="max-width: 100%; height: auto;">
       </a>
       <br><em>Back View</em>
     </td>
   </tr>
   <tr>
     <td align="center" width="50%">
-      <a href="https://raw.githubusercontent.com/wielandtech/w_lab/main/w_homelab_left.jpg" target="_blank">
-        <img src="https://raw.githubusercontent.com/wielandtech/w_lab/main/w_homelab_left.jpg" alt="Homelab Left Side View" width="400" style="max-width: 100%; height: auto;">
+      <a href="https://raw.githubusercontent.com/wielandtech-labs/w_lab/main/w_homelab_left.jpg" target="_blank">
+        <img src="https://raw.githubusercontent.com/wielandtech-labs/w_lab/main/w_homelab_left.jpg" alt="Homelab Left Side View" width="400" style="max-width: 100%; height: auto;">
       </a>
       <br><em>Left Side View</em>
     </td>
     <td align="center" width="50%">
-      <a href="https://raw.githubusercontent.com/wielandtech/w_lab/main/w_homelab_right.jpg" target="_blank">
-        <img src="https://raw.githubusercontent.com/wielandtech/w_lab/main/w_homelab_right.jpg" alt="Homelab Right Side View" width="400" style="max-width: 100%; height: auto;">
+      <a href="https://raw.githubusercontent.com/wielandtech-labs/w_lab/main/w_homelab_right.jpg" target="_blank">
+        <img src="https://raw.githubusercontent.com/wielandtech-labs/w_lab/main/w_homelab_right.jpg" alt="Homelab Right Side View" width="400" style="max-width: 100%; height: auto;">
       </a>
       <br><em>Right Side View</em>
     </td>
