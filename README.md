@@ -20,7 +20,7 @@ Eventually, this project will culminate with my own private cloud and self-hoste
 | **Patch Panel A** | DeskPi 12 Port CAT6 Network Patch Panel | $24.37* |
 | **Patch Panel B** | Rapink Mini 12 Port Cat6A Patch Panel | $29.68* |
 | **Compute (cluster)** | 3x Dell OptiPlex 7060 (i5-8500T CPU, 16GB RAM, 2.5GbE NIC) | $340.45 |
-| **GPU Workstation / Agent Node** | AMD 9950X3D, NVIDIA RTX 5080, 64GB DDR5, Asetek 360mm AIO (also serves as K3s agent node `wgpu01`) | ~$2,500 |
+| **GPU Workstation / Agent Node** | CyberPowerPC Winter 9950X: AMD Ryzen 9 9950X3D, NVIDIA RTX 5080 16GB, 32GB DDR5, 2TB NVMe, Asetek 360mm AIO (also serves as K3s agent node `wgpu01`) | $3,176.08* |
 | **NAS** | Synology DS923+ (2x Seagate IronWolf 8TB RAID1, 2x 500GB WD Red SN700 NVMe, 10GbE NIC) | $1,255* |
 | **UPS**	| Tripp Lite 600VA 300W UPS - BC600RNC | $155.09* |
 | **PDU**	| 4 Outlet PDU | $14.30* |
@@ -31,7 +31,7 @@ Eventually, this project will culminate with my own private cloud and self-hoste
 | **Misc. Devices** | HDHomeRun EXTEND | no longer sold |
 | **Mini‑rack** | DeskPi RackMate T2 (10″ 12U) | $195.03* |
 | **Mini-rack Accessories** | T2 Metal Shelf, 0.5U Brush Cable Management, 1U Blank, 2x 2U Blank, Mounting Hardware | $94.51* |
-| Total | One bad ass closet that'll actually fit in a closet (plus a workstation that won't) | ~$5,973* |
+| Total | One bad ass closet that'll actually fit in a closet (plus a workstation that won't) | $6,649.02* |
 
 
 
